@@ -93,7 +93,7 @@ export const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
       <div className="absolute bottom-0 left-0 right-0 p-5">
         <div className="bg-kmublue-50 p-4 rounded-lg">
           <h3 className="font-medium text-kmublue-700">학기 안내</h3>
-          <p className="text-sm text-gray-600 mt-1">2023-2학기</p>
+          <p className="text-sm text-gray-600 mt-1">2025-1학기</p>
           <p className="text-xs text-gray-500 mt-1">남은 기간: 6주</p>
         </div>
       </div>
