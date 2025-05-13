@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import { Bell, BookOpen, FileText, MessageSquare, Settings, X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type NotificationType = 'assignment' | 'announcement' | 'lecture' | 'important';
 type NotificationItemProps = {
@@ -55,6 +57,7 @@ const NotificationItem = ({ id, type, title, course, time, isRead }: Notificatio
 export const NotificationPanel = () => {
   const [activeTab, setActiveTab] = useState("lecture");
   const [showAllNotifications, setShowAllNotifications] = useState(false);
+  const isMobile = useIsMobile();
   
   const notifications = {
     all: [
@@ -73,6 +76,19 @@ export const NotificationPanel = () => {
   const handleViewAllNotifications = () => {
     setShowAllNotifications(true);
   };
+
+  if (isMobile) {
+    return (
+      <Link to="/notifications" className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border w-[320px] animate-fade-in z-50">
+        <div className="p-3 border-b">
+          <div className="flex justify-between items-center">
+            <h3 className="font-medium text-lg">알림</h3>
+            <span className="text-sm text-gray-500">새 알림이 {notifications.all.length}개 있습니다.</span>
+          </div>
+        </div>
+      </Link>
+    );
+  }
 
   return (
     <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border w-[400px] animate-fade-in z-50">
