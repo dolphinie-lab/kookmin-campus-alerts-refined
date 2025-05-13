@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Bell, BookOpen, Calendar, FileText, MessageCircle, Settings } from 'lucide-react';
+import React, { useState } from 'react';
+import { Bell, BookOpen, FileText, MessageSquare, X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -22,11 +22,11 @@ const NotificationItem = ({ id, type, title, course, time, isRead }: Notificatio
       case 'assignment':
         return <FileText className="h-5 w-5 text-notification-assignment" />;
       case 'announcement':
-        return <Bell className="h-5 w-5 text-notification-announcement" />;
+        return <MessageSquare className="h-5 w-5 text-notification-announcement" />;
       case 'lecture':
         return <BookOpen className="h-5 w-5 text-notification-lecture" />;
       case 'important':
-        return <Calendar className="h-5 w-5 text-notification-important" />;
+        return <Bell className="h-5 w-5 text-notification-important" />;
       default:
         return <Bell className="h-5 w-5" />;
     }
@@ -34,107 +34,106 @@ const NotificationItem = ({ id, type, title, course, time, isRead }: Notificatio
 
   return (
     <div className={`p-3 border-b last:border-b-0 ${!isRead ? "bg-gray-50" : ""}`}>
-      <div className="flex items-center space-x-3">
-        <div className="flex-shrink-0">
+      <div className="flex items-start space-x-3">
+        <div className="bg-gray-100 rounded-full p-3 flex-shrink-0">
           {getIcon()}
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate">{title}</p>
-          <p className="text-xs text-gray-500 truncate">{course}</p>
+          <div className="flex justify-between items-start">
+            <p className="text-sm font-medium text-gray-900 truncate">{course}</p>
+            <button className="text-red-500">
+              <X size={16} />
+            </button>
+          </div>
+          <p className="text-xs text-gray-700">{title}</p>
           <p className="text-xs text-gray-400">{time}</p>
         </div>
-        {!isRead && (
-          <div className={`h-2 w-2 rounded-full bg-notification-${type}`}></div>
-        )}
       </div>
     </div>
   );
 };
 
 export const NotificationPanel = () => {
+  const [activeTab, setActiveTab] = useState("all");
+  const [filterCategory, setFilterCategory] = useState("lecture");
+  
   const notifications = {
     all: [
-      { id: '1', type: 'assignment' as NotificationType, title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', time: '1시간 전', isRead: false },
-      { id: '2', type: 'announcement' as NotificationType, title: '중간고사 일정 공지', course: '데이터 구조', time: '3시간 전', isRead: false },
-      { id: '3', type: 'lecture' as NotificationType, title: '강의자료 업로드됨', course: '알고리즘', time: '어제', isRead: true },
-      { id: '4', type: 'important' as NotificationType, title: '수강신청 기간 안내', course: '학사 공지', time: '2일 전', isRead: true },
-      { id: '5', type: 'announcement' as NotificationType, title: '학과 MT 신청', course: '학과 공지', time: '3일 전', isRead: true },
+      { id: '1', type: 'assignment' as NotificationType, title: '새 과제가 등록되었습니다', course: '고객관계관리 (0485104-01)', time: '2025-05-13 17:46:27', isRead: false },
+      { id: '2', type: 'announcement' as NotificationType, title: '새 공지사항이 등록되었습니다', course: '고객관계관리 (0485104-01)', time: '2025-05-13 17:48:04', isRead: false },
     ],
     assignments: [
-      { id: '1', type: 'assignment' as NotificationType, title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', time: '1시간 전', isRead: false },
-      { id: '6', type: 'assignment' as NotificationType, title: '보고서 제출', course: '공학 설계', time: '3일 전', isRead: true },
+      { id: '1', type: 'assignment' as NotificationType, title: '새 과제가 등록되었습니다', course: '고객관계관리 (0485104-01)', time: '2025-05-13 17:46:27', isRead: false },
     ],
     announcements: [
-      { id: '2', type: 'announcement' as NotificationType, title: '중간고사 일정 공지', course: '데이터 구조', time: '3시간 전', isRead: false },
-      { id: '5', type: 'announcement' as NotificationType, title: '학과 MT 신청', course: '학과 공지', time: '3일 전', isRead: true },
+      { id: '2', type: 'announcement' as NotificationType, title: '새 공지사항이 등록되었습니다', course: '고객관계관리 (0485104-01)', time: '2025-05-13 17:48:04', isRead: false },
     ],
-    lectures: [
-      { id: '3', type: 'lecture' as NotificationType, title: '강의자료 업로드됨', course: '알고리즘', time: '어제', isRead: true },
-      { id: '7', type: 'lecture' as NotificationType, title: '보충 강의 영상', course: '운영체제', time: '4일 전', isRead: true },
-    ],
-    important: [
-      { id: '4', type: 'important' as NotificationType, title: '수강신청 기간 안내', course: '학사 공지', time: '2일 전', isRead: true },
-      { id: '8', type: 'important' as NotificationType, title: '등록금 납부 기간', course: '학사 공지', time: '7일 전', isRead: true },
-    ],
+    lectures: [],
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setFilterCategory(category);
   };
 
   return (
-    <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border w-80 animate-fade-in z-50">
-      <div className="p-4 border-b">
-        <h3 className="font-medium text-lg">알림</h3>
+    <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border w-[400px] animate-fade-in z-50">
+      <div className="p-3 border-b">
+        <div className="flex justify-between items-center">
+          <h3 className="font-medium text-lg">알림</h3>
+          <span className="text-sm text-gray-500">새 알림이 {notifications.all.length}개 있습니다.</span>
+        </div>
       </div>
       
-      <Tabs defaultValue="all">
-        <div className="p-2">
-          <TabsList className="w-full grid grid-cols-5">
-            <TabsTrigger value="all" className="text-xs">전체</TabsTrigger>
-            <TabsTrigger value="assignments" className="text-xs">과제</TabsTrigger>
-            <TabsTrigger value="announcements" className="text-xs">공지</TabsTrigger>
-            <TabsTrigger value="lectures" className="text-xs">강의</TabsTrigger>
-            <TabsTrigger value="important" className="text-xs">중요</TabsTrigger>
-          </TabsList>
+      <div className="p-2">
+        <select className="w-full p-2 border rounded mb-2">
+          <option>All</option>
+        </select>
+        
+        <div className="grid grid-cols-2 gap-2 mb-2">
+          <Button variant="outline" size="sm" className="w-full">메시지 모두보기</Button>
+          <Button variant="outline" size="sm" className="w-full">알림 모두보기</Button>
         </div>
         
-        <ScrollArea className="h-[300px]">
-          <TabsContent value="all" className="m-0">
-            {notifications.all.map(notification => (
-              <NotificationItem key={notification.id} {...notification} />
-            ))}
+        <Button variant="outline" size="sm" className="w-full mb-4">알림 모두 읽기</Button>
+        
+        {/* Course Material / Assignment / Announcement Tabs */}
+        <Tabs defaultValue="lecture" className="w-full">
+          <TabsList className="w-full grid grid-cols-3">
+            <TabsTrigger value="lecture" onClick={() => handleCategoryChange("lecture")}>강의 자료</TabsTrigger>
+            <TabsTrigger value="assignment" onClick={() => handleCategoryChange("assignment")}>과제</TabsTrigger>
+            <TabsTrigger value="announcement" onClick={() => handleCategoryChange("announcement")}>공지</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="lecture" className="mt-0">
+            <ScrollArea className="h-[300px]">
+              {notifications.lectures.length > 0 ? (
+                notifications.lectures.map(notification => (
+                  <NotificationItem key={notification.id} {...notification} />
+                ))
+              ) : (
+                <div className="p-4 text-center text-gray-500">
+                  새로운 강의 자료가 없습니다.
+                </div>
+              )}
+            </ScrollArea>
           </TabsContent>
           
-          <TabsContent value="assignments" className="m-0">
-            {notifications.assignments.map(notification => (
-              <NotificationItem key={notification.id} {...notification} />
-            ))}
+          <TabsContent value="assignment" className="mt-0">
+            <ScrollArea className="h-[300px]">
+              {notifications.assignments.map(notification => (
+                <NotificationItem key={notification.id} {...notification} />
+              ))}
+            </ScrollArea>
           </TabsContent>
           
-          <TabsContent value="announcements" className="m-0">
-            {notifications.announcements.map(notification => (
-              <NotificationItem key={notification.id} {...notification} />
-            ))}
+          <TabsContent value="announcement" className="mt-0">
+            <ScrollArea className="h-[300px]">
+              {notifications.announcements.map(notification => (
+                <NotificationItem key={notification.id} {...notification} />
+              ))}
+            </ScrollArea>
           </TabsContent>
-          
-          <TabsContent value="lectures" className="m-0">
-            {notifications.lectures.map(notification => (
-              <NotificationItem key={notification.id} {...notification} />
-            ))}
-          </TabsContent>
-          
-          <TabsContent value="important" className="m-0">
-            {notifications.important.map(notification => (
-              <NotificationItem key={notification.id} {...notification} />
-            ))}
-          </TabsContent>
-        </ScrollArea>
-      </Tabs>
-      
-      <div className="p-3 border-t">
-        <Link to="/notification-settings">
-          <Button variant="outline" size="sm" className="w-full text-sm">
-            <Settings className="mr-2 h-4 w-4" />
-            알림 설정
-          </Button>
-        </Link>
+        </Tabs>
       </div>
     </div>
   );
