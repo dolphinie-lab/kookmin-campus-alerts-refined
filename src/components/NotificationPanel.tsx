@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Bell, BookOpen, FileText, MessageSquare, Settings, X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -54,8 +53,8 @@ const NotificationItem = ({ id, type, title, course, time, isRead }: Notificatio
 };
 
 export const NotificationPanel = () => {
-  const [activeTab, setActiveTab] = useState("all");
-  const [filterCategory, setFilterCategory] = useState("lecture");
+  const [activeTab, setActiveTab] = useState("lecture");
+  const [showAllNotifications, setShowAllNotifications] = useState(false);
   
   const notifications = {
     all: [
@@ -71,8 +70,8 @@ export const NotificationPanel = () => {
     lectures: [],
   };
 
-  const handleCategoryChange = (category: string) => {
-    setFilterCategory(category);
+  const handleViewAllNotifications = () => {
+    setShowAllNotifications(true);
   };
 
   return (
@@ -85,55 +84,62 @@ export const NotificationPanel = () => {
       </div>
       
       <div className="p-2">
-        <select className="w-full p-2 border rounded mb-2">
-          <option>All</option>
-        </select>
-        
         <div className="grid grid-cols-2 gap-2 mb-2">
           <Button variant="outline" size="sm" className="w-full text-gray-700">메시지 모두보기</Button>
-          <Button variant="outline" size="sm" className="w-full text-gray-700">알림 모두보기</Button>
+          <Button variant="outline" size="sm" className="w-full text-gray-700" onClick={handleViewAllNotifications}>알림 모두보기</Button>
         </div>
         
         <Button variant="outline" size="sm" className="w-full mb-4 text-gray-700">알림 모두 읽기</Button>
         
-        {/* Course Material / Assignment / Announcement Tabs */}
-        <Tabs defaultValue="lecture" className="w-full">
-          <TabsList className="w-full grid grid-cols-3">
-            <TabsTrigger value="lecture" onClick={() => handleCategoryChange("lecture")}>강의 자료</TabsTrigger>
-            <TabsTrigger value="assignment" onClick={() => handleCategoryChange("assignment")}>과제</TabsTrigger>
-            <TabsTrigger value="announcement" onClick={() => handleCategoryChange("announcement")}>공지</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="lecture" className="mt-0">
+        {showAllNotifications ? (
+          <div>
+            <h4 className="font-medium mb-2 text-sm">모든 알림</h4>
             <ScrollArea className="h-[300px]">
-              {notifications.lectures.length > 0 ? (
-                notifications.lectures.map(notification => (
+              {notifications.all.map(notification => (
+                <NotificationItem key={notification.id} {...notification} />
+              ))}
+            </ScrollArea>
+          </div>
+        ) : (
+          
+          <Tabs defaultValue="lecture" className="w-full">
+            <TabsList className="w-full grid grid-cols-3">
+              <TabsTrigger value="lecture">강의 자료</TabsTrigger>
+              <TabsTrigger value="assignment">과제</TabsTrigger>
+              <TabsTrigger value="announcement">공지</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="lecture" className="mt-0">
+              <ScrollArea className="h-[300px]">
+                {notifications.lectures.length > 0 ? (
+                  notifications.lectures.map(notification => (
+                    <NotificationItem key={notification.id} {...notification} />
+                  ))
+                ) : (
+                  <div className="p-4 text-center text-gray-500">
+                    새로운 강의 자료가 없습니다.
+                  </div>
+                )}
+              </ScrollArea>
+            </TabsContent>
+            
+            <TabsContent value="assignment" className="mt-0">
+              <ScrollArea className="h-[300px]">
+                {notifications.assignments.map(notification => (
                   <NotificationItem key={notification.id} {...notification} />
-                ))
-              ) : (
-                <div className="p-4 text-center text-gray-500">
-                  새로운 강의 자료가 없습니다.
-                </div>
-              )}
-            </ScrollArea>
-          </TabsContent>
-          
-          <TabsContent value="assignment" className="mt-0">
-            <ScrollArea className="h-[300px]">
-              {notifications.assignments.map(notification => (
-                <NotificationItem key={notification.id} {...notification} />
-              ))}
-            </ScrollArea>
-          </TabsContent>
-          
-          <TabsContent value="announcement" className="mt-0">
-            <ScrollArea className="h-[300px]">
-              {notifications.announcements.map(notification => (
-                <NotificationItem key={notification.id} {...notification} />
-              ))}
-            </ScrollArea>
-          </TabsContent>
-        </Tabs>
+                ))}
+              </ScrollArea>
+            </TabsContent>
+            
+            <TabsContent value="announcement" className="mt-0">
+              <ScrollArea className="h-[300px]">
+                {notifications.announcements.map(notification => (
+                  <NotificationItem key={notification.id} {...notification} />
+                ))}
+              </ScrollArea>
+            </TabsContent>
+          </Tabs>
+        )}
       </div>
     </div>
   );
