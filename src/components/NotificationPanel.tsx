@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Bell, BookOpen, FileText, MessageSquare, X } from 'lucide-react';
+import { Bell, BookOpen, FileText, MessageSquare, Settings, X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -90,11 +90,11 @@ export const NotificationPanel = () => {
         </select>
         
         <div className="grid grid-cols-2 gap-2 mb-2">
-          <Button variant="outline" size="sm" className="w-full">메시지 모두보기</Button>
-          <Button variant="outline" size="sm" className="w-full">알림 모두보기</Button>
+          <Button variant="outline" size="sm" className="w-full text-gray-700">메시지 모두보기</Button>
+          <Button variant="outline" size="sm" className="w-full text-gray-700">알림 모두보기</Button>
         </div>
         
-        <Button variant="outline" size="sm" className="w-full mb-4">알림 모두 읽기</Button>
+        <Button variant="outline" size="sm" className="w-full mb-4 text-gray-700">알림 모두 읽기</Button>
         
         {/* Course Material / Assignment / Announcement Tabs */}
         <Tabs defaultValue="lecture" className="w-full">
