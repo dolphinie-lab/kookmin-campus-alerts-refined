@@ -45,21 +45,21 @@ export const Dashboard = () => {
   ];
   
   const upcomingAssignments = [
-    { id: '1', title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', dueDate: '2023.10.15' },
-    { id: '2', title: '데이터 구조 구현 과제', course: '데이터 구조', dueDate: '2023.10.18' },
-    { id: '3', title: '알고리즘 설계 과제', course: '알고리즘', dueDate: '2023.10.20' },
+    { id: '1', title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', dueDate: '2025.10.15' },
+    { id: '2', title: '데이터 구조 구현 과제', course: '데이터 구조', dueDate: '2025.10.18' },
+    { id: '3', title: '알고리즘 설계 과제', course: '알고리즘', dueDate: '2025.10.20' },
   ];
   
   const upcomingEvents = [
-    { id: '1', title: '중간고사', date: '2023.10.16 - 2023.10.20' },
-    { id: '2', title: '학과 MT', date: '2023.10.28 - 2023.10.29' },
-    { id: '3', title: '수강 철회 기간', date: '2023.10.30 - 2023.11.03' },
+    { id: '1', title: '중간고사', date: '2025.10.16 - 2025.10.20' },
+    { id: '2', title: '학과 MT', date: '2025.10.28 - 2025.10.29' },
+    { id: '3', title: '수강 철회 기간', date: '2025.10.30 - 2025.11.03' },
   ];
   
   const recentAnnouncements = [
-    { id: '1', title: '중간고사 일정 공지', course: '데이터 구조', date: '2023.10.09' },
-    { id: '2', title: '학과 MT 신청', course: '학과 공지', date: '2023.10.08' },
-    { id: '3', title: '수강신청 기간 안내', course: '학사 공지', date: '2023.10.05' },
+    { id: '1', title: '중간고사 일정 공지', course: '데이터 구조', date: '2025.10.09' },
+    { id: '2', title: '학과 MT 신청', course: '학과 공지', date: '2025.10.08' },
+    { id: '3', title: '수강신청 기간 안내', course: '학사 공지', date: '2025.10.05' },
   ];
 
   return (
