@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bell, BookOpen, Calendar, FileText, MessageCircle } from 'lucide-react';
+import { Bell, BookOpen, Calendar, FileText, MessageCircle, Settings } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -54,27 +54,27 @@ const NotificationItem = ({ id, type, title, course, time, isRead }: Notificatio
 export const NotificationPanel = () => {
   const notifications = {
     all: [
-      { id: '1', type: 'assignment', title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', time: '1시간 전', isRead: false },
-      { id: '2', type: 'announcement', title: '중간고사 일정 공지', course: '데이터 구조', time: '3시간 전', isRead: false },
-      { id: '3', type: 'lecture', title: '강의자료 업로드됨', course: '알고리즘', time: '어제', isRead: true },
-      { id: '4', type: 'important', title: '수강신청 기간 안내', course: '학사 공지', time: '2일 전', isRead: true },
-      { id: '5', type: 'announcement', title: '학과 MT 신청', course: '학과 공지', time: '3일 전', isRead: true },
+      { id: '1', type: 'assignment' as NotificationType, title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', time: '1시간 전', isRead: false },
+      { id: '2', type: 'announcement' as NotificationType, title: '중간고사 일정 공지', course: '데이터 구조', time: '3시간 전', isRead: false },
+      { id: '3', type: 'lecture' as NotificationType, title: '강의자료 업로드됨', course: '알고리즘', time: '어제', isRead: true },
+      { id: '4', type: 'important' as NotificationType, title: '수강신청 기간 안내', course: '학사 공지', time: '2일 전', isRead: true },
+      { id: '5', type: 'announcement' as NotificationType, title: '학과 MT 신청', course: '학과 공지', time: '3일 전', isRead: true },
     ],
     assignments: [
-      { id: '1', type: 'assignment', title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', time: '1시간 전', isRead: false },
-      { id: '6', type: 'assignment', title: '보고서 제출', course: '공학 설계', time: '3일 전', isRead: true },
+      { id: '1', type: 'assignment' as NotificationType, title: '프로그래밍 과제 제출', course: '컴퓨터 프로그래밍', time: '1시간 전', isRead: false },
+      { id: '6', type: 'assignment' as NotificationType, title: '보고서 제출', course: '공학 설계', time: '3일 전', isRead: true },
     ],
     announcements: [
-      { id: '2', type: 'announcement', title: '중간고사 일정 공지', course: '데이터 구조', time: '3시간 전', isRead: false },
-      { id: '5', type: 'announcement', title: '학과 MT 신청', course: '학과 공지', time: '3일 전', isRead: true },
+      { id: '2', type: 'announcement' as NotificationType, title: '중간고사 일정 공지', course: '데이터 구조', time: '3시간 전', isRead: false },
+      { id: '5', type: 'announcement' as NotificationType, title: '학과 MT 신청', course: '학과 공지', time: '3일 전', isRead: true },
     ],
     lectures: [
-      { id: '3', type: 'lecture', title: '강의자료 업로드됨', course: '알고리즘', time: '어제', isRead: true },
-      { id: '7', type: 'lecture', title: '보충 강의 영상', course: '운영체제', time: '4일 전', isRead: true },
+      { id: '3', type: 'lecture' as NotificationType, title: '강의자료 업로드됨', course: '알고리즘', time: '어제', isRead: true },
+      { id: '7', type: 'lecture' as NotificationType, title: '보충 강의 영상', course: '운영체제', time: '4일 전', isRead: true },
     ],
     important: [
-      { id: '4', type: 'important', title: '수강신청 기간 안내', course: '학사 공지', time: '2일 전', isRead: true },
-      { id: '8', type: 'important', title: '등록금 납부 기간', course: '학사 공지', time: '7일 전', isRead: true },
+      { id: '4', type: 'important' as NotificationType, title: '수강신청 기간 안내', course: '학사 공지', time: '2일 전', isRead: true },
+      { id: '8', type: 'important' as NotificationType, title: '등록금 납부 기간', course: '학사 공지', time: '7일 전', isRead: true },
     ],
   };
 
