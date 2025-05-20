@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MobileHome from './MobileHome';
 import { Card } from '@/components/ui/card';
 import { RefreshCw } from 'lucide-react';
+import CalendarWidget from '@/components/CalendarWidget';
 
 /**
  * iframe에 내장될 때 최적화된 뷰를 제공하는 컴포넌트
@@ -65,25 +66,33 @@ const IframeView = () => {
 
   return (
     <div className={`${isInIframe ? 'iframe-container' : ''} porview`}>
-      <Card className="p-portlet-controller board">
-        <div className="p-header-view-region">
-          <div className="title-bar-view-region">
-            <h3 className="p-title-view">국민대 E-Campus</h3>
-            <div className="p-refresh" onClick={handleRefresh}>
-              <span className={isRefreshing ? 'on' : ''}>
-                <RefreshCw className="h-4 w-4 mx-auto mt-2" />
-              </span>
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="md:w-2/3">
+          <Card className="p-portlet-controller board">
+            <div className="p-header-view-region">
+              <div className="title-bar-view-region">
+                <h3 className="p-title-view">국민대 E-Campus</h3>
+                <div className="p-refresh" onClick={handleRefresh}>
+                  <span className={isRefreshing ? 'on' : ''}>
+                    <RefreshCw className="h-4 w-4 mx-auto mt-2" />
+                  </span>
+                </div>
+              </div>
+              <div className="btn-bookmark">
+                <span>즐겨찾기</span>
+              </div>
             </div>
-          </div>
-          <div className="btn-bookmark">
-            <span>즐겨찾기</span>
-          </div>
+            
+            <div className="p-body-view-region porview scroll">
+              <MobileHome />
+            </div>
+          </Card>
         </div>
         
-        <div className="p-body-view-region porview scroll">
-          <MobileHome />
+        <div className="md:w-1/3">
+          <CalendarWidget />
         </div>
-      </Card>
+      </div>
     </div>
   );
 };

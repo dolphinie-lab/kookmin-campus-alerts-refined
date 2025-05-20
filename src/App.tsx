@@ -25,7 +25,9 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={isMobile ? <MobileHome /> : <Index />} />
+            <Route path="/" element={<IframeView />} />
+            <Route path="/mobile" element={<MobileHome />} />
+            <Route path="/desktop" element={<Index />} />
             <Route path="/notification-settings" element={<NotificationSettings />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/more" element={<More />} />
