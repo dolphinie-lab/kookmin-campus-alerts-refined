@@ -19,11 +19,12 @@ export const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
         <Button variant="ghost" className="text-white p-1 md:hidden" onClick={toggleSidebar}>
           <Menu size={24} />
         </Button>
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center">
-            <span className="text-white font-bold">KMU</span>
-          </div>
-          <h1 className="text-xl font-bold">국민대 E-Campus</h1>
+        <Link to="/" className="flex items-center">
+          <img 
+            src="/lovable-uploads/c5db53ef-2309-43eb-9247-0d22c3c8c4b6.png" 
+            alt="국민대학교 로고" 
+            className="h-12 w-12 object-contain"
+          />
         </Link>
       </div>
       
