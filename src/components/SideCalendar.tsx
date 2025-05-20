@@ -7,6 +7,7 @@ import { ko } from "date-fns/locale";
 
 export const SideCalendar = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const today = new Date();
 
   // Example calendar events (these would typically come from an API or state)
   const calendarEvents = [
@@ -25,11 +26,19 @@ export const SideCalendar = () => {
 
   return (
     <div className="space-y-4">
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-md font-medium">학사 일정</CardTitle>
+      <Card className="shadow-sm">
+        <CardHeader className="bg-[#F4F1FA] rounded-t-lg pb-2 pt-4">
+          <CardTitle className="text-md font-medium text-[#6E59A5]">Today</CardTitle>
+          <div className="flex items-baseline">
+            <span className="text-5xl font-bold text-[#7E69AB]">
+              {format(today, 'd')}
+            </span>
+            <span className="ml-2 text-sm text-gray-500">
+              {format(today, 'yyyy.MM')} {format(today, 'EEEE', { locale: ko })}
+            </span>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           <Calendar
             mode="single"
             selected={date}
@@ -41,9 +50,9 @@ export const SideCalendar = () => {
       </Card>
 
       {selectedDateEvents.length > 0 && (
-        <Card>
+        <Card className="shadow-sm">
           <CardHeader className="pb-2">
-            <CardTitle className="text-md font-medium">
+            <CardTitle className="text-md font-medium text-[#6E59A5]">
               {date && format(date, 'yyyy년 MM월 dd일')} 일정
             </CardTitle>
           </CardHeader>
@@ -57,7 +66,7 @@ export const SideCalendar = () => {
                       ? 'bg-red-50 text-red-800'
                       : event.type === 'assignment'
                       ? 'bg-blue-50 text-blue-800'
-                      : 'bg-green-50 text-green-800'
+                      : 'bg-[#F4F1FA] text-[#6E59A5]'
                   }`}
                 >
                   {event.title}

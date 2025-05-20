@@ -57,13 +57,13 @@ export const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
   return (
     <aside 
       className={cn(
-        "bg-sidebar fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 md:translate-x-0 border-r",
+        "bg-white fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 md:translate-x-0 border-r",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}
     >
       <div className="p-5">
         <div className="flex items-center justify-center mb-8">
-          <Link to="/" className="text-kmublue-700 font-bold text-2xl">
+          <Link to="/" className="text-[#6E59A5] font-bold text-2xl">
             E-Campus
           </Link>
         </div>
@@ -76,8 +76,8 @@ export const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
                   <Button
                     variant="ghost"
                     className={cn(
-                      "w-full justify-start text-gray-700 hover:text-kmublue-700 hover:bg-gray-100",
-                      location.pathname === item.path && "bg-gray-100 text-kmublue-700 font-semibold"
+                      "w-full justify-start text-gray-700 hover:text-[#7E69AB] hover:bg-[#F4F1FA]",
+                      location.pathname === item.path && "bg-[#F4F1FA] text-[#7E69AB] font-semibold"
                     )}
                   >
                     <item.icon className="mr-3 h-5 w-5" />
@@ -91,8 +91,8 @@ export const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
       </div>
       
       <div className="absolute bottom-0 left-0 right-0 p-5">
-        <div className="bg-kmublue-50 p-4 rounded-lg">
-          <h3 className="font-medium text-kmublue-700">학기 안내</h3>
+        <div className="bg-[#F4F1FA] p-4 rounded-lg">
+          <h3 className="font-medium text-[#6E59A5]">학기 안내</h3>
           <p className="text-sm text-gray-600 mt-1">2025-1학기</p>
           <p className="text-xs text-gray-500 mt-1">남은 기간: 6주</p>
         </div>

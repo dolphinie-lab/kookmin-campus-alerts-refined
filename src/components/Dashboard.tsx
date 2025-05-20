@@ -63,14 +63,12 @@ export const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-bold">대시보드</h2>
-      
+    <div className="space-y-6">      
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
+        <Card className="border-t-4 border-t-[#9b87f5] shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-md font-medium">
-              <FileText className="h-5 w-5 mr-2 inline-block text-notification-assignment" />
+              <FileText className="h-5 w-5 mr-2 inline-block text-[#9b87f5]" />
               예정된 과제
             </CardTitle>
           </CardHeader>
@@ -89,10 +87,10 @@ export const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-t-4 border-t-[#8B5CF6] shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-md font-medium">
-              <Calendar className="h-5 w-5 mr-2 inline-block text-notification-important" />
+              <Calendar className="h-5 w-5 mr-2 inline-block text-[#8B5CF6]" />
               일정
             </CardTitle>
           </CardHeader>
@@ -108,10 +106,10 @@ export const Dashboard = () => {
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-t-4 border-t-[#6E59A5] shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-md font-medium">
-              <Bell className="h-5 w-5 mr-2 inline-block text-notification-announcement" />
+              <Bell className="h-5 w-5 mr-2 inline-block text-[#6E59A5]" />
               최근 공지사항
             </CardTitle>
           </CardHeader>
@@ -132,7 +130,7 @@ export const Dashboard = () => {
       </div>
       
       <div>
-        <h3 className="text-xl font-bold mb-4">내 강의실</h3>
+        <h3 className="text-xl font-bold mb-4 text-[#1A1F2C]">내 강의실</h3>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {courses.map(course => (
             <CourseCard key={course.id} {...course} />

@@ -14,12 +14,15 @@ export const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
   };
 
   return (
-    <header className="bg-kmublue-700 text-white p-3 flex items-center justify-between sticky top-0 z-50 shadow-md">
+    <header className="bg-[#7E69AB] text-white p-3 flex items-center justify-between sticky top-0 z-50 shadow-md">
       <div className="flex items-center space-x-4">
         <Button variant="ghost" className="text-white p-1 md:hidden" onClick={toggleSidebar}>
           <Menu size={24} />
         </Button>
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center space-x-2">
+          <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center">
+            <span className="text-white font-bold">KMU</span>
+          </div>
           <h1 className="text-xl font-bold">국민대 E-Campus</h1>
         </Link>
       </div>
