@@ -2,7 +2,7 @@
 import React from 'react';
 import { MobileNavbar } from '@/components/MobileNavbar';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { BookOpen, FileText, MessageCircle } from 'lucide-react';
+import { BookOpen, FileText, MessageCircle, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 type CourseCardProps = {
@@ -25,20 +25,23 @@ const CourseCard = ({
   hasNewAnnouncements = false
 }: CourseCardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-sm mb-4 border-l-4 border-orange-400">
+    <div className="bg-white rounded-lg shadow-sm mb-4 border-l-4 border-orange-400 p-portlet-controller board">
       <div className="p-4">
-        <div className="flex justify-between">
-          <h3 className="font-bold text-lg">{title}</h3>
+        <div className="flex justify-between p-header-view-region">
+          <h3 className="font-bold text-lg p-title-view">{title}</h3>
           {badgeNumber && (
             <div className="rounded-full bg-gray-200 w-8 h-8 flex items-center justify-center text-sm">
               {badgeNumber}
             </div>
           )}
+          <div className="btn-bookmark">
+            <span>즐겨찾기</span>
+          </div>
         </div>
         <p className="text-gray-600 text-sm">{code}</p>
         <p className="text-gray-500 text-sm">{englishTitle}</p>
         
-        <div className="flex space-x-2 pt-2 mt-2 border-t">
+        <div className="flex space-x-2 pt-2 mt-2 border-t p-body-view-region">
           <Link to={`/courses/${code}/materials`} className={`flex items-center ${hasNewMaterials ? 'text-kmublue-500' : 'text-gray-500'}`}>
             <BookOpen className="h-4 w-4 mr-1" />
             <span className="text-xs">강의자료</span>
@@ -56,12 +59,20 @@ const CourseCard = ({
             <span className="text-xs">공지</span>
             {hasNewAnnouncements && <span className="w-2 h-2 bg-notification-announcement rounded-full ml-1"></span>}
           </Link>
+          
+          <div className="ml-auto p-refresh">
+            <RefreshCw className="h-4 w-4" />
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
+/**
+ * 이 컴포넌트는 iframe으로 삽입될 수 있도록 최적화되었습니다.
+ * 포털 사이트의 스타일과 통일성을 유지하기 위해 클래스명을 포털 CSS에 맞게 조정했습니다.
+ */
 const MobileHome = () => {
   const courses = [
     {
@@ -121,7 +132,7 @@ const MobileHome = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-20">
+    <div className="min-h-screen bg-gray-100 pb-20 porview">
       <div className="bg-kmublue-700 text-white p-4">
         <div className="flex items-center justify-between">
           <div>
@@ -138,18 +149,20 @@ const MobileHome = () => {
       <div className="p-4">
         <h3 className="text-xl font-bold mb-4">현재진행강좌</h3>
         
-        {courses.map((course, index) => (
-          <CourseCard 
-            key={index}
-            title={course.title}
-            code={course.code}
-            englishTitle={course.englishTitle}
-            badgeNumber={course.badgeNumber}
-            hasNewMaterials={course.hasNewMaterials}
-            hasNewAssignments={course.hasNewAssignments}
-            hasNewAnnouncements={course.hasNewAnnouncements}
-          />
-        ))}
+        <div className="porview scroll">
+          {courses.map((course, index) => (
+            <CourseCard 
+              key={index}
+              title={course.title}
+              code={course.code}
+              englishTitle={course.englishTitle}
+              badgeNumber={course.badgeNumber}
+              hasNewMaterials={course.hasNewMaterials}
+              hasNewAssignments={course.hasNewAssignments}
+              hasNewAnnouncements={course.hasNewAnnouncements}
+            />
+          ))}
+        </div>
         
         <div className="mt-4">
           <h3 className="text-xl font-bold mb-4">과거강좌</h3>

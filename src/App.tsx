@@ -11,6 +11,7 @@ import { useIsMobile } from "./hooks/use-mobile";
 import MobileHome from "./pages/MobileHome";
 import Notifications from "./pages/Notifications";
 import More from "./pages/More";
+import IframeView from "./pages/IframeView";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/more" element={<More />} />
             <Route path="/messages" element={isMobile ? <NotFound /> : <Navigate to="/" />} />
             <Route path="/calendar" element={isMobile ? <NotFound /> : <Navigate to="/" />} />
+            <Route path="/iframe" element={<IframeView />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

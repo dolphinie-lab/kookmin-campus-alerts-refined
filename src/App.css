@@ -1,8 +1,16 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;  /* 패딩을 제거하여 iframe 내에서 더 깔끔하게 표시 */
   text-align: center;
+}
+
+/* iframe 내에서 작동할 때를 위한 스타일 */
+body.in-iframe {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .logo {
@@ -39,4 +47,64 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* 포털 스타일과의 통합을 위한 추가 CSS */
+.porview {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+.p-refresh {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #e5e8ee;
+  border-radius: 4px;
+}
+
+.p-refresh:hover {
+  background-color: #d7dbe5;
+}
+
+.btn-bookmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d7dbe5;
+  cursor: pointer;
+}
+
+.btn-bookmark span {
+  text-indent: -9999em;
+  display: block;
+  width: 13px;
+  height: 12px;
+  transition: transform 0.5s ease;
+}
+
+.btn-bookmark.on {
+  background-color: #00cab5;
+}
+
+/* 스크롤 최적화 */
+.porview.scroll {
+  overflow-y: auto;
+  max-height: calc(100vh - 250px);  /* iframe 내에서의 스크롤을 위해 최대 높이 제한 */
+}
+
+/* 반응형 스타일 조정 */
+@media (max-width: 640px) {
+  #root {
+    padding: 0;
+  }
 }
