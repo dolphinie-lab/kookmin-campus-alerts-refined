@@ -21,9 +21,9 @@ export const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
         </Button>
         <Link to="/" className="flex items-center">
           <img 
-            src="/lovable-uploads/c5db53ef-2309-43eb-9247-0d22c3c8c4b6.png" 
+            src="/lovable-uploads/1fc39e98-6ce8-4160-a1e8-c774596b054a.png" 
             alt="국민대학교 로고" 
-            className="h-12 w-12 object-contain"
+            className="h-12 w-12 object-contain brightness-0 invert"
           />
         </Link>
       </div>
